@@ -1,0 +1,19 @@
+.side-nav-menu{
+    display: block;
+    position: absolute;
+    align-items: center;
+    margin-left: 0;
+    padding: 60px 0 0 0;
+    width: 60vw;
+    height: 100vh;
+    background: #000;
+}
+
+.nav-menu{
+    display: flex;
+    align-items: center;
+    margin-right: -24px;
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}
