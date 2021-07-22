@@ -1,8 +1,8 @@
 import {Row, Col} from 'react-bootstrap'
 import Carousel from 'react-bootstrap/Carousel'
-import Image1 from '../../../images/products/product1/11493980166120-Roadster-Men-White-Printed-Round-Neck-T-shirt-4411493980165893-5.jpg'
-import Image2 from '../../../images/products/product1/11493980166143-Roadster-Men-White-Printed-Round-Neck-T-shirt-4411493980165893-4.jpg'
-import Image3 from '../../../images/products/product1/11493980166174-Roadster-Men-White-Printed-Round-Neck-T-shirt-4411493980165893-2.jpg'
+import Image1 from '../../../../../images/products/product1/11493980166120-Roadster-Men-White-Printed-Round-Neck-T-shirt-4411493980165893-5.jpg'
+import Image2 from '../../../../../images/products/product1/11493980166143-Roadster-Men-White-Printed-Round-Neck-T-shirt-4411493980165893-4.jpg'
+import Image3 from '../../../../../images/products/product1/11493980166174-Roadster-Men-White-Printed-Round-Neck-T-shirt-4411493980165893-2.jpg'
 
 const ProductCard = ()=>{
 

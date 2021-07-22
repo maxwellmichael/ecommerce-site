@@ -1,11 +1,24 @@
 import {Switch, Route} from 'react-router-dom';
 import Home from './components/pages/home';
 import About from './components/pages/about';
-import Products from './components/pages/products';
+import MensClothingPage from './components/pages/products/clothing/mensClothing';
+import WomensClothingPage from './components/pages/products/clothing/womensClothing'
+import RouteWithSubRoutes from './components/utils/routesWithSubRoutes';
 
 
 
 const Routes = ()=>{
+
+    const ClothingRoutes = [
+        {
+            path:'/clothing/men',
+            component: MensClothingPage, 
+        },
+        {
+            path:'/clothing/women',
+            component: WomensClothingPage,
+        },
+    ];
 
     const mainRoutes = [
         {
@@ -16,16 +29,12 @@ const Routes = ()=>{
             path: '/about',
             component: About,
         },
-        {
-            path: '/products',
-            component: Products,
-        }
     ]
 
     return(
         <Switch>
-            {mainRoutes.map((route, i)=>
-            <Route key={i} path={route.path} exact component={route.component} />)}
+            {mainRoutes.map((route, i)=><Route key={i} path={route.path} exact component={route.component} />)}
+            {ClothingRoutes.map((route, i)=><RouteWithSubRoutes key={i} {...route} />)}
         </Switch>
     )
 }
