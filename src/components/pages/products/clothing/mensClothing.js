@@ -1,10 +1,25 @@
 import {motion} from 'framer-motion'
-import {Row, Col, DropdownButton, Dropdown} from 'react-bootstrap'
+import {Row, Col} from 'react-bootstrap'
 import FilterDropdown from '../../../utils/filterDropdown';
 import ProductCard from './utils/productCard';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import {useSelector} from 'react-redux';
+import { useFirestoreConnect } from "react-redux-firebase";
+
 
 
 const MensClothingPage = ()=>{
+
+    useFirestoreConnect({
+        collection: `bundles`,
+    });
+    const bundles = useSelector((state)=>state.firestore.data.bundles)
+    console.log(bundles)
+    const options = [
+        'NEWEST', 'FEATURED', 'Price: High to Low', 'Price: Low to High'];
+
+    const defaultOption = options[0];
 
     const mensFilters = [
         {
@@ -48,22 +63,21 @@ const MensClothingPage = ()=>{
                 </Col>
                 <Col xs={12} md={10} style={{padding:0}}>
                     <Row style={{margin:0}}>
-                        <DropdownButton style={{background:'white', color:'black'}}  title="Sort">
-                            <Dropdown.Item as="button">Action</Dropdown.Item>
-                            <Dropdown.Item as="button">Another action</Dropdown.Item>
-                            <Dropdown.Item as="button">Something else</Dropdown.Item>
-                        </DropdownButton>
+                        <Dropdown className="sort-dropdown" controlClassName="sort-dropdown-control" options={options} value={defaultOption} placeholder="SORT" />
                     </Row>
                     <Row style={{margin:'100px 0 0 0'}}>
                         <div className="clothing-card-container">
+
                             <ProductCard/>
                             <ProductCard/>
                             <ProductCard/>
                             <ProductCard/>
+
                             <ProductCard/>
                             <ProductCard/>
                             <ProductCard/>
                             <ProductCard/>
+
                         </div>
                     </Row>
                     
@@ -73,5 +87,6 @@ const MensClothingPage = ()=>{
         </motion.div>
     )
 }
+
 
 export default MensClothingPage;

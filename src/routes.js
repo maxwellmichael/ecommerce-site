@@ -1,6 +1,8 @@
 import {Switch, Route} from 'react-router-dom';
 import Home from './components/pages/home';
 import About from './components/pages/about';
+import SignInPage from './components/pages/signin';
+
 import MensClothingPage from './components/pages/products/clothing/mensClothing';
 import WomensClothingPage from './components/pages/products/clothing/womensClothing'
 import RouteWithSubRoutes from './components/utils/routesWithSubRoutes';
@@ -28,6 +30,10 @@ const Routes = ()=>{
         {
             path: '/about',
             component: About,
+        },
+        {
+            path: '/signin',
+            component: SignInPage,
         },
     ]
 

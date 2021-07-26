@@ -1,7 +1,8 @@
 import ProductCard from "./clothing/utils/productCard";
+import{connect} from 'react-redux';
 
-const Products = ()=>{
-
+const Products = (props)=>{
+    console.log(props.products)
     return(
         <div>
             Products Page
@@ -13,4 +14,11 @@ const Products = ()=>{
     )
 }
 
-export default Products;
+const mapStateToProps = (state)=>{
+
+    return({
+        products: state.products,
+    })
+}
+
+export default connect(mapStateToProps)(Products);

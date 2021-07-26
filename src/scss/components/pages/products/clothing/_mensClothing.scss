@@ -46,6 +46,17 @@ $primary: #ffffff;
     text-align: left;
 }
 
+.sort-dropdown{
+    border: 0;
+    outline: none;
+    margin: auto 20px auto auto;
+  
+}
+
+.sort-dropdown-control{
+    outline: none; 
+}
+
 .dropdown-container{
     width: auto;
     height: '48px';
@@ -116,12 +127,11 @@ $primary: #ffffff;
 
 
 .clothing-filters{
-    height: 100vh;
+    height: auto;
     background-color: $primary;
 }
 
 .clothing-card-container{
-    height: 200vh;
     background-color: $primary;
     display: flex;
     flex-wrap: wrap;

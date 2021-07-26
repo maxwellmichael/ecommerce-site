@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {ReactComponent as Logo} from '../../../images/icons/logo.svg'; 
 import {AnimatePresence, motion} from 'framer-motion';
 import {FiShoppingCart} from 'react-icons/fi';
+import {firebase} from '../../../firebase/config';
+import { LOGOUT } from '../../../redux/actions/user.actions';
 import {
   Nav,
   NavLink,
@@ -10,12 +12,26 @@ import {
   NavBtnLink
 } from './navElements';
 import Links from './navLinks';
+import {connect} from 'react-redux';
 
-const Navbar = () => {
+
+const Navbar = (props) => {
     const [sideNavMenu, setSideNavMenu] = useState(false);
-
+    const user = firebase.auth().onAuthStateChanged(user => user)
+    console.log('User:',user)
     const ToggleSideNavMenu = ()=>{
         setSideNavMenu(!sideNavMenu)
+    }
+
+    const handleLogout = ()=>{
+
+      firebase.auth().signOut().then(result => {
+          // successful...
+          console.log(result)
+      }).catch(error => {
+          // ...
+          console.log(error)
+      });
     }
 
 
@@ -46,6 +62,7 @@ const Navbar = () => {
 
 
         <NavBtn>
+          <button onClick={()=>props.dispatch(LOGOUT())}>Log Out</button>
           <NavBtnLink to='/signin'>Sign In</NavBtnLink>
           <NavLink to='/cart' style={{fontSize:'24px'}}><FiShoppingCart/></NavLink>
         </NavBtn>
@@ -54,4 +71,5 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+
+export default connect()(Navbar);
