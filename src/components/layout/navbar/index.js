@@ -23,17 +23,6 @@ const Navbar = (props) => {
         setSideNavMenu(!sideNavMenu)
     }
 
-    const handleLogout = ()=>{
-
-      firebase.auth().signOut().then(result => {
-          // successful...
-          console.log(result)
-      }).catch(error => {
-          // ...
-          console.log(error)
-      });
-    }
-
 
   return (
     <>

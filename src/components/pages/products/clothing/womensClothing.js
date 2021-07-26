@@ -1,5 +1,5 @@
 import {motion} from 'framer-motion'
-import {Row, Col} from 'react-bootstrap'
+import {Row} from 'react-bootstrap'
 
 
 const WomensClothingPage = ()=>{
