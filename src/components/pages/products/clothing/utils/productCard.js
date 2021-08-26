@@ -22,13 +22,15 @@ const ProductCard = ()=>{
                     )}
                 </Carousel>
             </div>
+            
             <div className="product-card-content-container">
+
                 <div className="product-card-content-primary">
-                    <div className="product-card-brand">
-                        Moda Rapido
-                    </div>
                     <div className="product-card-product-name">
-                        Solid Polo Collar T-shirt
+                        Real Clothing Factory OEM Service Custom Embroidered Hoodies Custom Unisex Custom Logo Hoodie
+                    </div>
+                    <div className="product-card-price">
+                        800<span>/set</span>
                     </div>
                 </div>
                 
@@ -38,14 +40,9 @@ const ProductCard = ()=>{
                             Sizes: S M L XL XXL XXXL
                         </div>
                 </div>
+
             </div>
-            <div className="product-card-content-container">
-                <div className="product-card-content">
-                    <div style={{display:'inline'}} className="product-card-brand">
-                        ₹599<span className="product-card-product-name"> <strike>₹649</strike> <span style={{color:'pink'}}>(40% OFF)</span></span>
-                    </div>
-                </div>
-            </div>
+
         </div>
     )
 }

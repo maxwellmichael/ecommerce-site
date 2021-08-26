@@ -2,7 +2,7 @@ import './App.css';
 import './scss/main.scss';
 import Layout from './components/layout/index';
 import {BrowserRouter as Router} from 'react-router-dom';
-import Routes from './routes';
+import Routes from './routes/routes';
 import {createStore, applyMiddleware} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './redux';

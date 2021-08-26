@@ -6,13 +6,13 @@ import 'firebase/auth';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyA8vn_CZOuxN3wS-vyJJGUeS3GC1x_ArIM",
-  authDomain: "ecommerce-site-c4a58.firebaseapp.com",
-  projectId: "ecommerce-site-c4a58",
-  storageBucket: "ecommerce-site-c4a58.appspot.com",
-  messagingSenderId: "376339577953",
-  appId: "1:376339577953:web:b823003fc351e7b13afe20",
-  measurementId: "G-NTWJ5FY0DT",
+  apiKey: "AIzaSyAkzeCDkbf3eIkWd8bmAi9WcjJwqIoWAYc",
+  authDomain: "hira-backend.firebaseapp.com",
+  projectId: "hira-backend",
+  storageBucket: "hira-backend.appspot.com",
+  messagingSenderId: "940862859574",
+  appId: "1:940862859574:web:e49695980680caa72f2b97",
+  measurementId: "G-Q38QFRMTFE",
   };
 
 export const reactReduxFirebaseConfig = {

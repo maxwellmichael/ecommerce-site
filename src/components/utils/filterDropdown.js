@@ -14,7 +14,7 @@ const FilterDropdown = (props)=>{
             </div>
             {dropped && <div className="dropdown-section-2">
                 <div className="filter-dropdown-types-container">
-                    {props.filter.types.map((type, i)=><div className="filter-dropdown-type">{type}</div>)}
+                    {props.filter.types.map((type, i)=><div key={i} className="filter-dropdown-type">{type}</div>)}
                 </div>
             </div>}
             
