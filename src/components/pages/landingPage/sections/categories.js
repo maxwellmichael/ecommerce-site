@@ -47,7 +47,7 @@ const Categories = ()=>{
             <Grid container spacing={1}>
                 <Grid container item xs={4} md={12} spacing={3}>
                     {categorieSet.map((item, i)=>(
-                        <Grid item xs={3}>
+                        <Grid key={i} item xs={3}>
                         <div style={{backgroundImage:`url(${item.image})`}} className='landing-page-categories-item'>
                             <div className='half-overlay'></div>
                             <div className='title'>{item.name}</div>

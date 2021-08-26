@@ -59,7 +59,7 @@ const Profile = ({dispatch, user, address})=>{
                     <Grid container xs={12}>
                         {address.map((item, i)=>{
                             return(
-                                <div className='profile-address'>
+                                <div key={i} className='profile-address'>
                                     <div className='address-name'>
                                         {item.name}
                                     </div>
