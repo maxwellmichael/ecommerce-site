@@ -4,19 +4,47 @@ import FilterDropdown from '../../utils/filterDropdown';
 import ProductCard from './clothing/utils/productCard';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import {useSelector} from 'react-redux';
-import { useFirestoreConnect } from "react-redux-firebase";
+import {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import { GET_PRODUCTS_FROM_FIRESTORE, REMOVE_ALL_PRODUCTS_FROM_STORE} from '../../../redux/actions/product.actions';
 
 
 
-const ClothingPage = (props)=>{
+const ClothingPage = ({dispatch, products})=>{
 
-    useFirestoreConnect({
-        collection: `sets`,
-    });
-    const sets = useSelector((state)=>state.firestore.data.sets)
-    console.log('Sets', sets)
-    console.log(props)
+    // useFirestoreConnect({
+    //     collection: `sets`,
+    // });
+    // const sets = useSelector((state)=>state.firestore.data.sets)
+    // console.log('Sets', sets)
+
+    const [category, setCategory] = useState();
+
+    useEffect(()=>{
+        if(category){
+            const query = {
+                category: category,
+            }
+            dispatch(REMOVE_ALL_PRODUCTS_FROM_STORE())
+            dispatch(GET_PRODUCTS_FROM_FIRESTORE(query))
+        }
+        else{
+            dispatch(REMOVE_ALL_PRODUCTS_FROM_STORE())
+            dispatch(GET_PRODUCTS_FROM_FIRESTORE())
+        }
+        
+    },[category, dispatch])
+
+    const handleFilterSelect = (filter, type)=>{
+        if(filter){
+
+            if(filter.name==='CATEGORY'){
+                setCategory(type)
+            }
+        }
+
+    }
+
     const options = [
         'NEWEST', 'FEATURED', 'Price: High to Low', 'Price: Low to High'];
 
@@ -25,21 +53,8 @@ const ClothingPage = (props)=>{
     const mensFilters = [
         {
             name:'CATEGORY',
-            types:['T-Shirt', 'Shirt', 'Vest', 'Shorts', 'Joggers', 'Boxers'],
+            types:['GOUN', 'CHURITHAR'],
         },
-        {
-            name:'SIZES',
-            types:['STANDARD', 'XS', 'S', 'M', 'L', 'XL', '2XL'],
-        },
-        {
-            name:'COLORS',
-            types:['BLACK', 'BLUE', 'RED', 'WHITE', 'GREEN'],
-        },
-        {
-            name:'DESIGN',
-            types:['PLAIN', 'PRINTED', 'CHEQUED', 'CHEST PRINTED'],
-        },
-
     ];
 
 
@@ -51,7 +66,7 @@ const ClothingPage = (props)=>{
         exit={{x:'-100vw', opacity:0, transition:{ease:'easeInOut', duration:0.6}}}>
 
             <Row style={{margin:0}}>
-                <div className="clothing-title-1">Men's Clothing</div>
+                <div className="clothing-title-1">Women's Clothing</div>
             </Row>
             <Row style={{margin:0, width:'100%'}}>
                 <Col xs={12} md={2} style={{padding:'12px 30px 6px 40px', position:'sticky', height:'500px', top:0}}>
@@ -59,7 +74,7 @@ const ClothingPage = (props)=>{
                         <Row style={{margin:0}}>
                             <div className="clothing-title-3-faded filter-dropdown-heading">FILTERS</div>
                         </Row>
-                        {mensFilters.map((filter, i)=><FilterDropdown key={i} filter={filter} />)}
+                        {mensFilters.map((filter, i)=><FilterDropdown handleFilterSelect={handleFilterSelect} key={i} filter={filter} />)}
                     </div>
                 </Col>
                 <Col xs={12} md={10} style={{padding:0}}>
@@ -68,16 +83,9 @@ const ClothingPage = (props)=>{
                     </Row>
                     <Row style={{margin:'100px 0 0 0'}}>
                         <div className="clothing-card-container">
-
-                            <ProductCard/>
-                            <ProductCard/>
-                            <ProductCard/>
-                            <ProductCard/>
-
-                            <ProductCard/>
-                            <ProductCard/>
-                            <ProductCard/>
-                            <ProductCard/>
+                            {products.map((product, i)=>{
+                                return <ProductCard product={product} key={i} />
+                            })}
 
                         </div>
                     </Row>
@@ -89,5 +97,12 @@ const ClothingPage = (props)=>{
     )
 }
 
+const mapStateToProps = (state)=>{
 
-export default ClothingPage;
+    return({
+        products: state.products,
+    })
+}
+
+
+export default connect(mapStateToProps)(ClothingPage);

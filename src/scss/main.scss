@@ -9,6 +9,8 @@
 @import './components//ui/forms';
 
 @import './components/layout/navbar';
+@import '../components/layout/footer/styles/footer';
+
 
 @import '../components/utils/modals/styles/modal';
 
@@ -24,6 +26,6 @@
 
 
 //Products Clothing
-@import './components/pages/products/clothing';
-@import './components/pages/products/clothing/utils/productCard';
-@import './components/pages/products/clothing/utils/addProductForm';
+@import '../components/pages/products/styles/clothing';
+@import '../components/pages/products/styles/productCard';
+@import '../components/pages/products/styles/addProductForm';

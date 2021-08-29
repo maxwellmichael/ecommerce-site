@@ -5,6 +5,11 @@ const FilterDropdown = (props)=>{
 
     const [dropped, setDropped] = useState(false)
 
+    const handleFilterSelect = (filter, type)=>{
+        console.log(filter)
+        return props.handleFilterSelect(filter, type)
+    }
+
 
     return(
         <div className="dropdown-container" onClick={()=>setDropped(!dropped)}>
@@ -14,7 +19,7 @@ const FilterDropdown = (props)=>{
             </div>
             {dropped && <div className="dropdown-section-2">
                 <div className="filter-dropdown-types-container">
-                    {props.filter.types.map((type, i)=><div key={i} className="filter-dropdown-type">{type}</div>)}
+                    {props.filter.types.map((type, i)=><div onClick={()=>handleFilterSelect(props.filter, type)} key={i} className="filter-dropdown-type">{type}</div>)}
                 </div>
             </div>}
             

@@ -1,15 +1,15 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { isLoaded, isEmpty } from "react-redux-firebase";
-import { useSelector } from "react-redux";
+import {auth} from '../firebase/authServices';
 
 const PrivateRoute = ({ children, ...remainingProps }) => {
-  const auth = useSelector(state => state.firebase.auth);
+  const user = auth.currentUser;
   return (
     <Route
       {...remainingProps}
       render={({ location }) =>
-        isLoaded(auth) && !isEmpty(auth) ? (
+        isLoaded(user) && !isEmpty(user) ? (
           children
         ) : (
           <Redirect

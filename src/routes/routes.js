@@ -6,28 +6,15 @@ import Profile from '../components/pages/user/profile';
 import Register from '../components/pages/user/register';
 import ClothingPage from '../components/pages/products';
 import RouteWithSubRoutes from './routesWithSubRoutes';
+import PrivateRoute from './privateRoute';
 
 
 const Routes = ()=>{
 
-    const ClothingRoutes = [
+    const productRoutes = [
         {
-            path:'/clothing/men',
+            path:'/products',
             component: ClothingPage,
-            props:{
-                filter:{
-                    gender:'male',
-                }
-            }
-        },
-        {
-            path:'/clothing/women',
-            component: ClothingPage,
-            props:{
-                filter:{
-                    gender:'female',
-                }
-            }
         },
     ];
 
@@ -40,10 +27,6 @@ const Routes = ()=>{
             path: '/user/register',
             component: Register,
         },
-        {
-            path: '/user/profile',
-            component: Profile,
-        }
     ]
 
     const mainRoutes = [
@@ -57,11 +40,19 @@ const Routes = ()=>{
         },
     ]
 
+    const privateRoutes = [
+        {
+            path: '/user/profile',
+            component: Profile,
+        }
+    ]
+
     return(
         <Switch>
             {mainRoutes.map((route, i)=><Route key={i} path={route.path} exact component={route.component} />)}
-            {ClothingRoutes.map((route, i)=><RouteWithSubRoutes key={i} {...route} />)}
+            {productRoutes.map((route, i)=><RouteWithSubRoutes key={i} {...route} />)}
             {userRoutes.map((route, i)=><RouteWithSubRoutes key={i} {...route} />)}
+            {privateRoutes.map((route, i)=><PrivateRoute to={route.path} key={i}>{<route.component />}</PrivateRoute>)}
         </Switch>
     )
 }

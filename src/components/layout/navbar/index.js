@@ -13,6 +13,7 @@ import {
 } from './navElements';
 import Links from './navLinks';
 import {connect} from 'react-redux';
+import {Badge, Button} from '@material-ui/core';
 
 
 const Navbar = (props) => {
@@ -49,11 +50,11 @@ const Navbar = (props) => {
 
 
         <NavBtn>
-          
-          {props.user && <button onClick={()=>props.dispatch(LOGOUT())}>Log Out</button>}
-          {!props.user && <NavBtnLink to='/user/login'>Sign In</NavBtnLink>}
+          {props.user && <Button color='error' onClick={()=>props.dispatch(LOGOUT())} variant="contained">Logout</Button>}
+          {!props.user && <NavBtnLink to='/user/login'>Login/Register</NavBtnLink>}
           {props.user && <NavLink to='/user/profile' style={{fontSize:'24px'}}><HiUserCircle/></NavLink>}
-          <NavLink to='/cart' style={{fontSize:'24px'}}><FiShoppingCart/></NavLink>
+          <NavLink to='/cart' style={{fontSize:'24px'}}><Badge badgeContent={4} color="secondary">
+          <FiShoppingCart/></Badge></NavLink>
         </NavBtn>
       </Nav>
     </>

@@ -1,18 +1,17 @@
 import Carousel from 'react-bootstrap/Carousel'
-import Image1 from '../../../../../images/products/product1/11493980166120-Roadster-Men-White-Printed-Round-Neck-T-shirt-4411493980165893-5.jpg'
-import Image2 from '../../../../../images/products/product1/11493980166143-Roadster-Men-White-Printed-Round-Neck-T-shirt-4411493980165893-4.jpg'
-import Image3 from '../../../../../images/products/product1/11493980166174-Roadster-Men-White-Printed-Round-Neck-T-shirt-4411493980165893-2.jpg'
 
-const ProductCard = ()=>{
+const ProductCard = (props)=>{
 
-    const Images = [Image1, Image2, Image3];
+
+    const images = props.product.items.map((item)=>item.image_url.src)
+    images.push(props.product.main_image.src);
 
     return(
         <div className="product-card">
             <div className='product-card-carousel'>
                 <Carousel>
-                    {Images.map((image, i)=>
-                        <Carousel.Item key={i} interval={1000}>
+                    {images.map((image, i)=>
+                        <Carousel.Item key={i} >
                             <img
                             className="d-block w-100"
                             src={image}
@@ -27,19 +26,16 @@ const ProductCard = ()=>{
 
                 <div className="product-card-content-primary">
                     <div className="product-card-product-name">
-                        Real Clothing Factory OEM Service Custom Embroidered Hoodies Custom Unisex Custom Logo Hoodie
+                        {props.product.name}
                     </div>
                     <div className="product-card-price">
-                        800<span>/set</span>
+                        {props.product.selling_price}<span>/set</span>
+                    </div>
+                    <div className="product-card-price">
+                        {props.product.items.length}<span>Pieces</span>
                     </div>
                 </div>
                 
-                <div className="product-card-content-secondary">
-                        <button className="product-card-content-button">Wishlist</button>
-                        <div className="product-card-content-sizes">
-                            Sizes: S M L XL XXL XXXL
-                        </div>
-                </div>
 
             </div>
 
