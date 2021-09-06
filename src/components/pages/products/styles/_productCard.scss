@@ -10,7 +10,7 @@
     display: inline-block;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    margin: 0 auto 30px auto;
+    margin: 0 12px 30px 12px;
     cursor: pointer;
 
     .product-card-carousel{
@@ -124,6 +124,14 @@
         opacity:0;
     }
 
+
+    @media screen and(max-width: 900px){
+
+        width:95%;
+        height:480px;
+        margin: 30px auto;
+        
+    }
 
 }
 
