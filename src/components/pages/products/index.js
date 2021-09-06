@@ -69,7 +69,7 @@ const ClothingPage = ({dispatch, products})=>{
                 <div className="clothing-title-1">Women's Clothing</div>
             </Row>
             <Row style={{margin:0, width:'100%'}}>
-                <Col xs={12} md={2} style={{padding:'12px 30px 6px 40px', position:'sticky', height:'500px', top:0}}>
+                <Col xs={12} md={2} style={{marginTop:0,padding:'0px 30px 6px 40px', position:'sticky', height:'500px', top:0, zIndex:2}}>
                     <div className="clothing-filters">
                         <Row style={{margin:0}}>
                             <div className="clothing-title-3-faded filter-dropdown-heading">FILTERS</div>
