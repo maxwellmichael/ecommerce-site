@@ -48,7 +48,7 @@ const Categories = ()=>{
                 </div>
             </Grid>
             
-            {/* <Grid container spacing={3} style={{margin:0,width:'100%'}}>
+            <Grid container spacing={3} style={{margin:0,width:'100%'}}>
                     {categorieSet.map((item, i)=>(
                         <Grid key={i} item xs={3}>
                         <div style={{backgroundImage:`url(${item.image})`}} className='landing-page-categories-item'>
@@ -57,7 +57,7 @@ const Categories = ()=>{
                         </div>
                         </Grid>
                     ))}
-            </Grid> */}
+            </Grid>
         </Grid>
     )
 }
