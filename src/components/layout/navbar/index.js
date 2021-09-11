@@ -1,71 +1,99 @@
-import React, {useState} from 'react';
-import {ReactComponent as Logo} from '../../../images/icons/logo.svg'; 
-import {AnimatePresence, motion} from 'framer-motion';
-import {FiShoppingCart} from 'react-icons/fi';
-import {HiUserCircle} from 'react-icons/hi'
-import { LOGOUT } from '../../../redux/actions/user.actions';
-import {
-  Nav,
-  NavLink,
-  Bars,
-  NavBtn,
-  NavBtnLink
-} from './navElements';
-import Links from './navLinks';
+import React from 'react';
+import { IconButton, Toolbar } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import MenuIcon from '@material-ui/icons/Menu';
+import { AccountCircle, ShoppingCart } from '@material-ui/icons';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import {ReactComponent as AppLogo} from '../../../images/icons/logo.svg';
+import {Badge} from '@material-ui/core';
+import {Menu, MenuItem} from '@material-ui/core';
 import {connect} from 'react-redux';
-import {Badge, Button} from '@material-ui/core';
+import {Link} from 'react-router-dom';
+import {LOGOUT} from '../../../redux/actions/user.actions';
+import navbarStyle from './styles';
+import Drawer from './sections/leftDrawer';
 
+const NavBar = (props)=>{
 
-const Navbar = (props) => {
-    const [sideNavMenu, setSideNavMenu] = useState(false);
-    const ToggleSideNavMenu = ()=>{
-        setSideNavMenu(!sideNavMenu)
-    }
+  const classes = navbarStyle();
+  const mobile = useMediaQuery('min-width:900px');
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const isAccountMenuOpen = Boolean(anchorEl);
 
-  return (
-    <>
-      <Nav>
-        <NavLink style={{margin:'auto 80px auto 0', padding:'auto'}} to='/'>
-            <Logo/>
-        </NavLink>
-        <Bars onClick={()=>ToggleSideNavMenu()} />
+  const handleAccountMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-        <motion.div className="nav-menu" transition={{duration:1}}
-        initial={{x:300, opacity: 0 }}
-        animate={{x:0, opacity: 1 }}>
-          <Links/>
-        </motion.div>
+  const handleAccountMenuClose = () => {
+    setAnchorEl(null);
+  };
 
-        <AnimatePresence>
-            {sideNavMenu&&<motion.div 
-                className="side-nav-menu"
-                transition={{duration:0.6}}
-                initial={{x:-300, opacity: 0 }}
-                animate={{x:0, opacity: 1 }}
-                exit={{x:-300, opacity: 0 }}>
-                <Links/>
-            </motion.div>}
-        </AnimatePresence>
+  
 
+  const AccountMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      id='account-menu'
+      keepMounted
+      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={isAccountMenuOpen}
+      onClose={handleAccountMenuClose}
+      color='secondary'
+    >
+      {!props.user && <MenuItem onClick={handleAccountMenuClose}><Link className={classes.link} to='/user/login'>Login</Link></MenuItem>}
+      {props.user && <MenuItem onClick={()=>props.dispatch(LOGOUT())}><div className={classes.link}>Logout</div></MenuItem>}
+      {props.user && <MenuItem onClick={handleAccountMenuClose}><Link  className={classes.link} to='/user/profile' >Profile</Link></MenuItem>}
 
-        <NavBtn>
-          {props.user && <Button color='error' onClick={()=>props.dispatch(LOGOUT())} variant="contained">Logout</Button>}
-          {!props.user && <NavBtnLink to='/user/login'>Login/Register</NavBtnLink>}
-          {props.user && <NavLink to='/user/profile' style={{fontSize:'24px'}}><HiUserCircle/></NavLink>}
-          <NavLink to='/cart' style={{fontSize:'24px'}}><Badge badgeContent={4} color="secondary">
-          <FiShoppingCart/></Badge></NavLink>
-        </NavBtn>
-      </Nav>
-    </>
+    </Menu>
   );
-};
 
+  const [drawer, setDrawer] = React.useState(false);
+
+  const toggleDrawer = (value) => (event) => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setDrawer(value);
+  };
+
+
+  return(
+    <div className={classes.grow}>
+      <Drawer toggleDrawer={(value)=>toggleDrawer(value)} drawer={drawer} />
+      <AppBar elevation={0} position='static' color='secondary'>
+      <Toolbar>
+        {!mobile && (<IconButton onClick={()=>setDrawer(true)} edge='start' className={classes.menuButton} aria-label="menu">
+          <MenuIcon/>
+        </IconButton>)}
+        
+        <IconButton  className={classes.logoButton}>
+          <Link to='/' className={classes.homeLink}>
+            <AppLogo className={classes.logo}/>
+          </Link>
+        </IconButton>
+
+        <IconButton onClick={handleAccountMenuOpen} edge='end' className={classes.accountButton} aria-label="account" aria-haspopup="true" aria-controls='account-menu'>
+          <AccountCircle/>
+        </IconButton>
+
+        <IconButton edge='end' className={classes.cartButton} aria-label="cart">
+          <Badge badgeContent={4} color="error">
+            <ShoppingCart/>
+          </Badge>
+        </IconButton>
+        
+      </Toolbar>
+    </AppBar>
+    {AccountMenu}
+    </div>
+  );
+}
 const mapStateToProps = (state)=>{
 
   return({
     user: state.user,
   })
 }
-
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps)(NavBar); 

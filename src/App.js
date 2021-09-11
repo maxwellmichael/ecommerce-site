@@ -11,8 +11,31 @@ import {Provider} from 'react-redux';
 import {createFirestoreInstance} from 'redux-firestore';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { firebase,reactReduxFirebaseConfig as rrfConfig } from './firebase/config';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#f8f6f4',
+    },
+    secondary: {
+      main: '#f1eee9',
+    },
+    background: {
+      default: '#f8f6f4',
+    }
+  },
+
+  typography: {
+    fontFamily: 'Josefin Sans',
+    fontWeightLight: 400,
+    fontWeightRegular: 500,
+    fontWeightMedium: 600,
+    fontWeightBold: 700, 
+  }
+}) 
 
 
 function App(){
@@ -21,11 +44,13 @@ function App(){
       <ReactReduxFirebaseProvider config={rrfConfig} firebase={firebase} dispatch={store.dispatch}
       createFirestoreInstance={createFirestoreInstance}>
         <Router>
-          <Layout>
-            <div className="App">
-              <Routes/>
-            </div>
-          </Layout>
+          <ThemeProvider theme={theme}>
+            <Layout>
+              <div className="App">
+                <Routes/>
+              </div>
+            </Layout>
+          </ThemeProvider>
         </Router>
       </ReactReduxFirebaseProvider>
     </Provider>

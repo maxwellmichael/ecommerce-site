@@ -5,6 +5,7 @@ import {FaUserAlt} from 'react-icons/fa';
 //import {useSelector} from 'react-redux';
 import {SHOW_MODAL} from '../../../redux/actions/modal.actions';
 import {GET_ADDRESS, REMOVE_ADDRESS_FROM_FIRESTORE} from '../../../redux/actions/address.actions';
+import {LOGOUT} from '../../../redux/actions/user.actions';
 import {useEffect} from 'react';
 
 const Profile = ({dispatch, user, address})=>{
@@ -25,7 +26,7 @@ const Profile = ({dispatch, user, address})=>{
     return(
         <div className='profile-main'>
             <Grid container spacing={2}>
-
+            
                 <Grid item xs={12}> 
                     <div className='profile-icon'>
                         {user?<img alt='user' src={user.photoURL} />:<FaUserAlt />}
@@ -48,7 +49,9 @@ const Profile = ({dispatch, user, address})=>{
                         </div>
                     </div>
                 </Grid>
-
+                <Grid item xs={12}>
+                {user && <Button color='error' onClick={()=>dispatch(LOGOUT())} variant="contained">Logout</Button>}
+                </Grid>
                 <Grid item xs={12}>
                     <div className='profile-title'>
                         <h1>Saved Address</h1>
