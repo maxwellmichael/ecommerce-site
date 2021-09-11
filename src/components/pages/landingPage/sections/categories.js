@@ -39,13 +39,16 @@ const categorieSet = [
 const Categories = ()=>{
 
     return(
-        <div className='landing-page-categories'>
-            <div className='landing-page-categories-title'>
-                <h4>Categories</h4>
-            </div>
+        <Grid container spacing={3} style={{width:'100vw',margin:0}}>
 
-            <Grid container spacing={1}>
-                <Grid container item xs={4} md={12} spacing={3}>
+        
+            <Grid item xs={12} style={{width:'100vw',margin:0}}>
+                <div className='landing-page-categories-title'>
+                    <h4>Categories</h4>
+                </div>
+            </Grid>
+            
+            {/* <Grid container spacing={3} style={{margin:0,width:'100%'}}>
                     {categorieSet.map((item, i)=>(
                         <Grid key={i} item xs={3}>
                         <div style={{backgroundImage:`url(${item.image})`}} className='landing-page-categories-item'>
@@ -54,9 +57,8 @@ const Categories = ()=>{
                         </div>
                         </Grid>
                     ))}
-                </Grid>
-            </Grid>
-        </div>
+            </Grid> */}
+        </Grid>
     )
 }
 

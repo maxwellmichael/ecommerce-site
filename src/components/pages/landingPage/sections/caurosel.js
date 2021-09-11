@@ -1,7 +1,7 @@
 import {motion, AnimatePresence} from 'framer-motion';
-import CauroselImage1 from '../images/caurosel/slider-image-1.webp';
-import CauroselImage2 from '../images/caurosel/slider-image-2.webp';
-import CauroselImage3 from '../images/caurosel/slider-image-3.webp';
+import CauroselImage1 from '../images/caurosel/slider-image-1.jpg';
+import CauroselImage2 from '../images/caurosel/slider-image-2.jpg';
+import CauroselImage3 from '../images/caurosel/slider-image-3.jpg';
 import {useState} from 'react';
 import {GoPrimitiveDot} from 'react-icons/go';
 const Caurosel = ()=>{

@@ -62,7 +62,7 @@ const NavBar = (props)=>{
   return(
     <div className={classes.grow}>
       <Drawer toggleDrawer={(value)=>toggleDrawer(value)} drawer={drawer} />
-      <AppBar elevation={0} position='static' color='secondary'>
+      <AppBar elevation={2} position='static' color='secondary'>
       <Toolbar>
         {!mobile && (<IconButton onClick={()=>setDrawer(true)} edge='start' className={classes.menuButton} aria-label="menu">
           <MenuIcon/>
