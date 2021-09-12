@@ -67,6 +67,7 @@ $primary: #f8f6f4;
     display: block;
     box-sizing: border-box;
     text-rendering: optimizeSpeed;
+    transition: height;
 
     .dropdown-section-1{
         display: flex;

@@ -1,36 +1,68 @@
 import {Grid} from '@material-ui/core'
-import KurthaImage from '../images/categories/kurthas.webp'; 
-import FusionImage from '../images/categories/fusion.webp';
-import SareeImage from '../images/categories/sarees.webp'; 
-import OtherImage from '../images/categories/others.webp'; 
-import RegalImage from '../images/categories/regal-mustard.webp'; 
-import TopImage from '../images/categories/tops.webp'; 
+import Blouses from '../assets/categories/blouses.webp';
+import CropTops from '../assets/categories/crop-tops.webp';
+import Bottoms from '../assets/categories/bottoms.webp';
+import FloralTops from '../assets/categories/floral-tops.webp';
+import LaceTops from '../assets/categories/lace-tops.webp';
+import PeplumTops from '../assets/categories/peplum-tops.webp';
+import Skirts from '../assets/categories/skirts.webp';
+import SolidTops from '../assets/categories/solid-tops.webp';
+import StripedTops from '../assets/categories/striped-tops.webp';
+import WinterWear from '../assets/categories/winter-wear.webp';
+import WrapTops from '../assets/categories/wrap-tops.webp';
+
+
 
 
 const categorieSet = [
     {
-        name: 'Kurthas',
-        image: KurthaImage
+        name: 'Blouses',
+        image: Blouses
     },
     {
-        name: 'Fusion',
-        image: FusionImage
+        name: 'Crop Tops',
+        image: CropTops
     },
     {
-        name: 'Sarees',
-        image: SareeImage
+        name: 'Floral Tops',
+        image: FloralTops
     },
     {
-        name: 'Regal',
-        image: RegalImage
+        name: 'Bottoms',
+        image: Bottoms
     },
     {
-        name: 'Top',
-        image: TopImage
+        name: 'Lace Tops',
+        image: LaceTops
     },
     {
-        name: 'Others',
-        image: OtherImage
+        name: 'Skirts',
+        image: Skirts
+    },
+
+    {
+        name: 'Peplum Tops',
+        image: PeplumTops
+    },
+    {
+        name: 'Solid Tops',
+        image: SolidTops
+    },
+    {
+        name: 'Striped Tops',
+        image: StripedTops
+    },
+    {
+        name: 'Winter Wears',
+        image: WinterWear
+    },
+    {
+        name: 'Wrap Tops',
+        image: WrapTops
+    },
+    {
+        name: 'Skirts',
+        image: Skirts
     },
 ];
 
@@ -39,22 +71,26 @@ const categorieSet = [
 const Categories = ()=>{
 
     return(
-        <Grid container spacing={3} style={{width:'100vw',margin:0}}>
+        <Grid container spacing={3} style={{width:'100vw',margin:0,overflow:'hidden'}}>
 
         
             <Grid item xs={12} style={{width:'100vw',margin:0}}>
                 <div className='landing-page-categories-title'>
-                    <h4>Categories</h4>
+                    <h4>WARDROBE MUST-HAVES</h4>
                 </div>
             </Grid>
             
             <Grid container spacing={3} style={{margin:0,width:'100%'}}>
                     {categorieSet.map((item, i)=>(
-                        <Grid key={i} item xs={3}>
-                        <div style={{backgroundImage:`url(${item.image})`}} className='landing-page-categories-item'>
-                            <div className='half-overlay'></div>
-                            <div className='title'>{item.name}</div>
-                        </div>
+                        <Grid className='landingpage-categories-card' key={i} item xs={6} md={4} lg={2}>
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <div style={{backgroundImage:`url(${item.image})`}} className='image'></div>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <h4 className='name'>{item.name}</h4>
+                                </Grid>
+                            </Grid>
                         </Grid>
                     ))}
             </Grid>
