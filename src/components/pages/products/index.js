@@ -1,8 +1,9 @@
 import {motion} from 'framer-motion'
-import {Row, Col} from 'react-bootstrap'
+import {Row} from 'react-bootstrap'
+import {Grid} from '@material-ui/core';
 import FilterDropdown from '../../utils/filterDropdown';
 import ProductCard from './clothing/utils/productCard';
-import Dropdown from 'react-dropdown';
+//import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
@@ -45,10 +46,9 @@ const ClothingPage = ({dispatch, products})=>{
 
     }
 
-    const options = [
-        'NEWEST', 'FEATURED', 'Price: High to Low', 'Price: Low to High'];
-
-    const defaultOption = options[0];
+    //const options = [
+    //  'NEWEST', 'FEATURED', 'Price: High to Low', 'Price: Low to High'];
+    // const defaultOption = options[0];
 
     const mensFilters = [
         {
@@ -65,11 +65,47 @@ const ClothingPage = ({dispatch, products})=>{
         transition={{ease:'easeInOut', duration:0.6, delay:0.5}} 
         exit={{x:'-100vw', opacity:0, transition:{ease:'easeInOut', duration:0.6}}}>
 
-            <Row style={{margin:0}}>
-                <div className="clothing-title-1">Women's Clothing</div>
-            </Row>
-            <Row style={{margin:0, width:'100%'}}>
-                <Col xs={12} md={2} style={{marginTop:0,padding:'0px 30px 6px 40px', position:'sticky', height:'500px', top:0, zIndex:2}}>
+            <Grid container>
+            
+                <Grid item xs={12}>
+                    <div className="clothing-title-1">Women's Clothing</div>
+                </Grid>
+
+                <Grid container style={{margin:0,padding:0}}>
+
+                    <Grid container style={{position:'sticky',zIndex:2,margin:0,top:0,backgroundColor:'#f8f6f4',borderBottomLeftRadius:12,borderBottomRightRadius:12}}>
+
+                        <Grid container spacing={3} style={{margin:0}}>
+                            <Grid item md={6} xs={12}>
+                                <div className="clothing-filters">
+                                    <Row style={{margin:0}}>
+                                        <div style={{paddingLeft:6}} className="clothing-title-3-faded filter-dropdown-heading">FILTERS</div>
+                                    </Row>
+                                    {mensFilters.map((filter, i)=><FilterDropdown handleFilterSelect={handleFilterSelect} key={i} filter={filter} />)}
+                                </div>
+                            </Grid>
+                        </Grid>
+                        
+                        {/* <Grid item xs={4}>
+                            <Row style={{margin:0}}>
+                                <Dropdown className="sort-dropdown" controlClassName="sort-dropdown-control" options={options} value={defaultOption} placeholder="SORT" />
+                            </Row>
+                        </Grid> */}
+                        
+                    </Grid>
+
+                    <Grid container spacing={3} style={{margin:0}}>
+                        <div className="clothing-card-container">
+                            {products.map((product, i)=>{
+                                return <ProductCard product={product} key={i} />
+                            })}
+                        </div>
+                    </Grid>
+
+                </Grid>
+            
+            {/* <Row style={{margin:0, width:'100%'}}>
+                <Col xs={12} md={2} style={{marginTop:0,padding:'0px 30px 6px 40px', position:'sticky', height:'500px', top:0, zIndex:2,margin:0}}>
                     <div className="clothing-filters">
                         <Row style={{margin:0}}>
                             <div className="clothing-title-3-faded filter-dropdown-heading">FILTERS</div>
@@ -91,8 +127,9 @@ const ClothingPage = ({dispatch, products})=>{
                     </Row>
                     
                 </Col>
-            </Row>
-
+            </Row> */}
+            
+            </Grid>                        
         </motion.div>
     )
 }

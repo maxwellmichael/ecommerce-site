@@ -10,51 +10,60 @@ const ProductCard = (props)=>{
 
     return(
         <div className="product-card">
-            <div className='product-card-carousel'>
-                <Carousel>
-                    {images.map((image, i)=>
-                        <Carousel.Item key={i} >
-                            <img
-                            className="d-block w-100"
-                            src={image}
-                            alt="slide"
-                            />
-                        </Carousel.Item>
-                    )}
-                </Carousel>
-            </div>
+            <Grid container style={{margin:0,width:'100%',padding:0}}>
+
+                <Grid xs={6} md={12} item style={{margin:0,width:'100%',padding:0}}>
+                    <div className='product-card-carousel'>
+                        <Carousel>
+                            {images.map((image, i)=>
+                                <Carousel.Item key={i} >
+                                    <img
+                                    className="d-block w-100"
+                                    src={image}
+                                    alt="slide"
+                                    />
+                                </Carousel.Item>
+                            )}
+                        </Carousel>
+                    </div>
+                </Grid>
+
+                <Grid xs={6} md={12} item style={{margin:0,width:'100%',padding:0}}>
+                    <div className="product-card-content-container">
+                        <div className="product-card-content-primary">
+                            
+                            <Grid container spacing={3}>
+
+                                <Grid item xs={12}>
+                                    <div className="product-card-product-name">
+                                        {props.product.name}
+                                    </div>
+                                </Grid>
+
+                                <Grid xs={6} item>
+                                    <div className="product-card-content-text-secondary">
+                                        ₹{props.product.selling_price}<span>/set</span>
+                                    </div>
+                                    <div className="product-card-content-text-secondary">
+                                        {props.product.items.length}<span> Pieces</span>
+                                    </div>
+                                </Grid>
+
+                                <Grid xs={6} item>
+                                    <Button variant="contained" color="secondary">
+                                        <FaCartPlus style={{width:24,height:20}} />
+                                    </Button>
+                                </Grid>
+
+                            </Grid>
+                        </div>
+                    </div>
+                </Grid>
+
+            </Grid>
             
-            <div className="product-card-content-container">
-
-                <div className="product-card-content-primary">
-                    
-                    <Grid container spacing={3}>
-
-                        <Grid item xs={12}>
-                            <div className="product-card-product-name">
-                                {props.product.name}
-                            </div>
-                        </Grid>
-
-                        <Grid xs={6} item>
-                            <div className="product-card-content-text-secondary">
-                                ₹{props.product.selling_price}<span>/set</span>
-                            </div>
-                            <div className="product-card-content-text-secondary">
-                                {props.product.items.length}<span> Pieces</span>
-                            </div>
-                        </Grid>
-
-                        <Grid xs={6} item>
-                            <Button variant="outlined" color="primary" startIcon={<FaCartPlus />}>Cart</Button>
-                        </Grid>
-
-                    </Grid>
-                    
-                </div>
-                
-
-            </div>
+            
+            
 
         </div>
     )

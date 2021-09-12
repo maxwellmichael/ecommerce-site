@@ -59,6 +59,7 @@ $primary: #f8f6f4;
 
 .dropdown-container{
     width: auto;
+    max-width: 200px;
     height: '48px';
     background-color: $primary;
     border-bottom: 1px solid black;
@@ -85,7 +86,7 @@ $primary: #f8f6f4;
             margin-inline-start: 0px;
             margin-inline-end: 0px;
             text-align: left;
-            padding: 8px 12px 8px 0;
+            padding: 8px 12px 8px 12px;
             margin: 10px 0 2px 0;
             font-family: 'Prompt', sans-serif;
         }
@@ -119,6 +120,11 @@ $primary: #f8f6f4;
             }
 
         }
+    }
+
+    @media screen and(max-width:900px) {
+        max-width: 100%;
+        
     }
     
 }

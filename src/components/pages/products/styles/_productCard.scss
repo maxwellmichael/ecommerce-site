@@ -7,10 +7,10 @@
     position: relative;
     vertical-align: top;
     overflow: hidden;
-    display: inline-block;
+    display: flex;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    margin: 0 12px 30px 12px;
+    margin: 30px auto 0px auto;
     cursor: pointer;
 
     .product-card-carousel{
@@ -127,9 +127,9 @@
 
     @media screen and(max-width: 900px){
 
-        width:85%;
-        height:400px;
-        margin: 30px auto;
+        width:100%;
+        height:240px;
+        margin: 0;
         
     }
 
