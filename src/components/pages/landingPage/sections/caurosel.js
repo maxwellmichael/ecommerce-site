@@ -2,13 +2,17 @@ import {motion, AnimatePresence} from 'framer-motion';
 import CauroselImage1 from '../assets/caurosel/caurosel-1.webp';
 import CauroselImage2 from '../assets/caurosel/caurosel-2.webp';
 import CauroselImage3 from '../assets/caurosel/caurosel-3.webp';
+import MobileCauroselImage1 from '../assets/caurosel/mobile-caurosel-1.jpg';
+import MobileCauroselImage2 from '../assets/caurosel/mobile-caurosel-2.jpg';
+import MobileCauroselImage3 from '../assets/caurosel/mobile-caurosel-3.jpg';
 import {useState, useEffect} from 'react';
 import {GoPrimitiveDot} from 'react-icons/go';
+import {useMediaQuery} from '@material-ui/core'
 //import {Carousel} from 'react-bootstrap';
 const Caurosel = ()=>{
 
     const [imageIndex, setImageIndex] = useState(0)
-
+    const isMobile = useMediaQuery('(max-width:900px)');
     useEffect(()=>{
         const interval = setInterval(()=>{
             if(imageIndex>=2){
@@ -25,13 +29,13 @@ const Caurosel = ()=>{
 
     const cauroselItems = [
         {
-            imageUrl: CauroselImage1,
+            imageUrl: isMobile?MobileCauroselImage1:CauroselImage1,
         },
         {
-            imageUrl: CauroselImage2,
+            imageUrl: isMobile?MobileCauroselImage2:CauroselImage2,
         },
         {
-            imageUrl: CauroselImage3,
+            imageUrl: isMobile?MobileCauroselImage3:CauroselImage3,
         }
     ];
 
