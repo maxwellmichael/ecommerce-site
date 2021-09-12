@@ -1,12 +1,25 @@
 import {motion, AnimatePresence} from 'framer-motion';
-import CauroselImage1 from '../images/caurosel/slider-image-1.jpg';
-import CauroselImage2 from '../images/caurosel/slider-image-2.jpg';
-import CauroselImage3 from '../images/caurosel/slider-image-3.jpg';
-import {useState} from 'react';
+import CauroselImage1 from '../assets/caurosel/caurosel-1.webp';
+import CauroselImage2 from '../assets/caurosel/caurosel-2.webp';
+import CauroselImage3 from '../assets/caurosel/caurosel-3.webp';
+import {useState, useEffect} from 'react';
 import {GoPrimitiveDot} from 'react-icons/go';
+//import {Carousel} from 'react-bootstrap';
 const Caurosel = ()=>{
 
     const [imageIndex, setImageIndex] = useState(0)
+
+    useEffect(()=>{
+        const interval = setInterval(()=>{
+            if(imageIndex>=2){
+                setImageIndex(0);
+            }
+            else if(imageIndex<2){
+                setImageIndex(imageIndex+1)
+            }
+        }, 2500);
+        return ()=>clearInterval(interval)
+    })
     const [slideEnterDirection, setSlideEnterDirection] = useState(-300)
     const [slideExitDirection, setSlideExitDirection] = useState(600)
 
@@ -40,6 +53,8 @@ const Caurosel = ()=>{
         }
     }
 
+   
+
     return(
         <motion.div className='motion-container' transition={{duration:1}} initial={{y:300, opacity: 0 }} animate={{y:0, opacity: 1 }}>
             <div className='caurosel-main'>
@@ -50,7 +65,7 @@ const Caurosel = ()=>{
                         initial={{ opacity: 0, x: slideEnterDirection }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: slideExitDirection }}
-                        transition={{duration:0.6}}
+                        transition={{duration:0.2}}
                         className='caurosel-image' style={{backgroundImage:`url(${cauroselItems[imageIndex].imageUrl})`}}>
                         </motion.div>
                     </AnimatePresence>

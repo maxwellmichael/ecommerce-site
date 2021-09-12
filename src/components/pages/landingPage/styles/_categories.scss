@@ -1,20 +1,21 @@
 
 
 .landing-page-categories-title{
-    height: 200px;
     margin:0;
     padding: 12px;
 
     h4{
+        font-family: 'Prompt', sans-serif;
         position: relative;
         text-align: center;
         text-transform: uppercase;
         color: #3e4152;
         letter-spacing: .15em;
         font-size: 1.8em;
-        padding: 50px 0 10px 30px;
+        padding: 50px auto 0px auto;
         max-height: 5em;
         font-weight: 500;
+        
     }
 }
 

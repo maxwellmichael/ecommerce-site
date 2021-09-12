@@ -76,7 +76,7 @@ const Categories = ()=>{
         
             <Grid item xs={12} style={{width:'100vw',margin:0}}>
                 <div className='landing-page-categories-title'>
-                    <h4>WARDROBE MUST-HAVES</h4>
+                    <h4>TOP CATEGORIES</h4>
                 </div>
             </Grid>
             
