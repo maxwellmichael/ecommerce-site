@@ -3,16 +3,17 @@ import {firebase} from '../../firebase/config';
 
 
 export const LOGIN_SUCCESS = (user) => {
+ 
   return {
     type: "LOGIN_SUCCESS",
     currentUser: user,
   }
 }
 
-export const REGISTER_SUCCESS = () => {
+export const REGISTER_SUCCESS = (user) => {
   return {
     type: "REGISTER_SUCCESS",
-    currentUser: auth.currentUser.toJSON(),
+    currentUser: user,
   }
 }
 
@@ -31,7 +32,12 @@ export const REGISTER = (email, password, name) => async dispatch => {
         userName: name,
         email: result.user.email,
       })
-      dispatch(REGISTER_SUCCESS())
+      firebase.firestore().collection('users').where('uid','==',auth.currentUser.toJSON().uid).get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            dispatch(REGISTER_SUCCESS(doc.data()));
+        });
+      })
     })
     .catch((err)=>{
       console.log(err)
@@ -45,7 +51,12 @@ export const REGISTER = (email, password, name) => async dispatch => {
 export const LOGIN = (email, password) => async dispatch => {
   try {
     await auth.signInWithEmailAndPassword(email, password)
-    dispatch(LOGIN_SUCCESS(auth.currentUser.toJSON()))
+    firebase.firestore().collection('users').where('uid','==',auth.currentUser.toJSON().uid).get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+          dispatch(LOGIN_SUCCESS(doc.data()));
+      });
+    })
   } catch (error) {
     throw error
   }
@@ -63,10 +74,17 @@ export const LOGIN_WITH_GOOGLE = ()=> async dispatch =>{
                 email: result.user.email,
                 profilePhoto: result.user.photoURL,
               })
-              dispatch(LOGIN_SUCCESS(auth.currentUser.toJSON()))
+              .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    dispatch(LOGIN_SUCCESS(doc.data()));
+                });
+              })
+              //dispatch(LOGIN_SUCCESS(auth.currentUser.toJSON()))
             }
             else{
-              dispatch(LOGIN_SUCCESS(auth.currentUser.toJSON()))
+              querySnapshot.forEach((doc) => {
+                dispatch(LOGIN_SUCCESS(doc.data()));
+              });
             }
             
           })
@@ -96,7 +114,15 @@ export const LOGOUT = ()=>async dispatch =>{
 export const UPDATE_USER = ()=>async dispatch =>{
     try{
         auth.onAuthStateChanged(user => {
-            dispatch(LOGIN_SUCCESS(user))
+          if(user){
+            firebase.firestore().collection('users').where('uid','==',user.uid).get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                  dispatch(LOGIN_SUCCESS(doc.data()));
+              });
+            })
+          }
+          
         });
     }
     catch(error){

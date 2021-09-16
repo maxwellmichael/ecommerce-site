@@ -7,6 +7,7 @@ import {SHOW_MODAL} from '../../../redux/actions/modal.actions';
 import {GET_ADDRESS, REMOVE_ADDRESS_FROM_FIRESTORE} from '../../../redux/actions/address.actions';
 import {LOGOUT} from '../../../redux/actions/user.actions';
 import {useEffect} from 'react';
+import {ReactComponent as DefaultUserLogo} from '../../../images/icons/default_user.svg';
 
 const Profile = ({dispatch, user, address})=>{
 
@@ -18,7 +19,7 @@ const Profile = ({dispatch, user, address})=>{
 
     console.log(address)
     // useFirestoreConnect({
-    //     collection: `address`,
+    //     collection: `users`,
     // });
     // const address = useSelector((state)=>state.firestore.data.address)
     // console.log('address', address)
@@ -29,7 +30,7 @@ const Profile = ({dispatch, user, address})=>{
             
                 <Grid item xs={12}> 
                     <div className='profile-icon'>
-                        {user?<img alt='user' src={user.photoURL} />:<FaUserAlt />}
+                        {user?<img alt='user' src={user.profilePhoto?user.profilePhoto:<DefaultUserLogo/>} />:<FaUserAlt />}
                     </div>
                     <div className='profile-name'>
                         <h1>{user?user.displayName:'Loading..'}</h1>

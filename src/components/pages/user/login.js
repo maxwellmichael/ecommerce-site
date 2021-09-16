@@ -27,7 +27,6 @@ const LogIn = (props) => {
         </Grid>
 
         {/*<input placeholder='email' type='text' name='email' {...register("email")} />
-        
         <input placeholder='password' type='password' name='password' {...register("password", { required: true })} />*/}
         <Grid item xs={12}>{errors.exampleRequired && <span>This field is required</span>}</Grid>
         <Grid container spacing={1}>
