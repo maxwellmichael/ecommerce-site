@@ -14,13 +14,14 @@ const Register = (props) => {
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
-    props.dispatch(REGISTER(data.email, data.password));
+    props.dispatch(REGISTER(data.email, data.password, data.name));
   });
 
   return (
     <form className='form-main' onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={3}>
         <Grid xs={12} item><div className='title'>Register</div></Grid>
+        <Grid item xs={12}><TextField style={{width:'80%'}} label="Name" {...register("name")} /></Grid>
         <Grid item xs={12}><TextField style={{width:'80%'}} label="Email" {...register("email")} /></Grid>
         <Grid item xs={12}><TextField style={{width:'80%'}} type='password' label="Password" {...register("password")} />
         </Grid>
@@ -37,7 +38,7 @@ const Register = (props) => {
           </Grid>
           <Grid item xs={6}>
             <Button type='submit' variant="contained" color="primary">
-              <Link style={{color:'white'}} to='/user/login'>Login</Link>
+              <Link style={{color:'rgba(0, 0, 0, 0.87)',textDecoration:'none'}} to='/user/login'>Login</Link>
             </Button>
           </Grid>
           

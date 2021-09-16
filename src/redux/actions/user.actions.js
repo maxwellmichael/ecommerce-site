@@ -1,4 +1,6 @@
 import { auth, googleAuthProvider } from "../../firebase/authServices";
+import {firebase} from '../../firebase/config';
+
 
 export const LOGIN_SUCCESS = (user) => {
   return {
@@ -20,10 +22,21 @@ export const LOGOUT_SUCCESS = ()=>{
       }
 }
 
-export const REGISTER = (email, password) => async dispatch => {
+export const REGISTER = (email, password, name) => async dispatch => {
   try {
     await auth.createUserWithEmailAndPassword(email, password)
-    dispatch(REGISTER_SUCCESS())
+    .then((result)=>{
+      firebase.firestore().collection('users').add({
+        uid: result.user.uid,
+        userName: name,
+        email: result.user.email,
+      })
+      dispatch(REGISTER_SUCCESS())
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+    
   } catch (error) {
     throw error
   }
@@ -40,8 +53,26 @@ export const LOGIN = (email, password) => async dispatch => {
 
 export const LOGIN_WITH_GOOGLE = ()=> async dispatch =>{
     try{
-        auth.signInWithPopup(googleAuthProvider).then(() => {
-            dispatch(LOGIN_SUCCESS(auth.currentUser.toJSON()))
+        auth.signInWithPopup(googleAuthProvider).then((result) => {
+          firebase.firestore().collection('users').where('uid','==',result.user.uid).get()
+          .then((querySnapshot) => {
+            if(querySnapshot.empty){
+              firebase.firestore().collection('users').add({
+                uid: result.user.uid,
+                userName: result.user.displayName,
+                email: result.user.email,
+                profilePhoto: result.user.photoURL,
+              })
+              dispatch(LOGIN_SUCCESS(auth.currentUser.toJSON()))
+            }
+            else{
+              dispatch(LOGIN_SUCCESS(auth.currentUser.toJSON()))
+            }
+            
+          })
+          .catch((err)=>{
+            console.log(err)
+          })
         })
     }
     catch (error) {

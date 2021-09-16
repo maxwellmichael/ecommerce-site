@@ -38,7 +38,7 @@ const LogIn = (props) => {
           </Grid>
           <Grid item xs={6}>
             <Button type='submit' variant="contained" color="primary">
-              <Link style={{color:'white'}} to='/user/register'>Register</Link>
+              <Link style={{color:'rgba(0, 0, 0, 0.87)', textDecoration:'none'}} to='/user/register'>Register</Link>
             </Button>
           </Grid>
           
