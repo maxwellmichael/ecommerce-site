@@ -63,6 +63,14 @@ const navbarStyle = makeStyles((theme)=>{
         fontSize: 40,
       },
 
+      navProfilePhoto:{
+        width: '1.5em',
+        height:'1.5em',
+        border: '2px solid black',
+        borderRadius: '100%',
+        overflow: 'hidden',
+      }
+
     }
 })
 

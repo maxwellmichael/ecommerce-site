@@ -75,11 +75,11 @@ const NavBar = (props)=>{
         </IconButton>
 
         <IconButton onClick={handleAccountMenuOpen} edge='end' className={classes.accountButton} aria-label="account" aria-haspopup="true" aria-controls='account-menu'>
-          <AccountCircle/>
+          {props.user && props.user.profilePhoto?<img alt='Profile' className={classes.navProfilePhoto} src={props.user.profilePhoto} />:<AccountCircle/>}
         </IconButton>
 
         <IconButton edge='end' className={classes.cartButton} aria-label="cart">
-          <Badge badgeContent={4} color="error">
+          <Badge badgeContent={props.user?props.user.cart.length:0} color="error">
             <ShoppingCart/>
           </Badge>
         </IconButton>

@@ -12,6 +12,11 @@ const LandingPage = ()=>{
             <Grid container>
                 <Caurosel />
                 <Categories />
+                <Grid container>
+                    <Grid item>
+                        
+                    </Grid>
+                </Grid>
             </Grid>
         </motion.div>
     )

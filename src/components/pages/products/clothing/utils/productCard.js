@@ -1,9 +1,10 @@
 import Carousel from 'react-bootstrap/Carousel';
 import {Grid, Button} from '@material-ui/core';
 import {FaCartPlus} from 'react-icons/fa';
+import { ADD_PRODUCT_TO_FIRESTORE_CART } from '../../../../../redux/actions/cart.actions';
+import { connect } from 'react-redux';
 
 const ProductCard = (props)=>{
-
 
     const images = props.product.items.map((item)=>item.image_url.src)
     images.push(props.product.main_image.src);
@@ -50,7 +51,7 @@ const ProductCard = (props)=>{
                                 </Grid>
 
                                 <Grid xs={6} item>
-                                    <Button variant="contained" color="secondary">
+                                    <Button onClick={()=>props.dispatch(ADD_PRODUCT_TO_FIRESTORE_CART({id:props.product.id}))} variant="contained" color="secondary">
                                         <FaCartPlus style={{width:24,height:20}} />
                                     </Button>
                                 </Grid>
@@ -69,4 +70,5 @@ const ProductCard = (props)=>{
     )
 }
 
-export default ProductCard;
+
+export default connect()(ProductCard);

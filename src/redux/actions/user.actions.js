@@ -31,6 +31,7 @@ export const REGISTER = (email, password, name) => async dispatch => {
         uid: result.user.uid,
         userName: name,
         email: result.user.email,
+        cart: [],
       })
       firebase.firestore().collection('users').where('uid','==',auth.currentUser.toJSON().uid).get()
       .then((querySnapshot) => {
@@ -73,6 +74,7 @@ export const LOGIN_WITH_GOOGLE = ()=> async dispatch =>{
                 userName: result.user.displayName,
                 email: result.user.email,
                 profilePhoto: result.user.photoURL,
+                cart: [],
               })
               .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
