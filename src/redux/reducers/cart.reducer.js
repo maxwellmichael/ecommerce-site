@@ -1,7 +1,6 @@
-const initialState=[]
 
-const cartReducer = (state=initialState, action)=>{
-    let cart = [...state];
+const cartReducer = (state=[], action)=>{
+    let cart = state.map(value=>value)
     switch(action.type){
 
         case 'ADD_TO_CART':
@@ -11,8 +10,15 @@ const cartReducer = (state=initialState, action)=>{
         case 'CLEAR_CART':
             return [];
 
+        case 'REMOVE_PRODUCT_FROM_CART':
+            console.log('Payload', action.payload)
+            console.log('Cart Before',cart)
+            const newCart = cart.filter((product)=>product.id!==action.payload.id);
+            console.log('Cart After',newCart);
+            return newCart;
+
         default:
-            return [...state];
+            return state;
     }
 }
 

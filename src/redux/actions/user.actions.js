@@ -77,9 +77,7 @@ export const LOGIN_WITH_GOOGLE = ()=> async dispatch =>{
                 cart: [],
               })
               .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    dispatch(LOGIN_SUCCESS(doc.data()));
-                });
+                dispatch(LOGIN_SUCCESS(auth.currentUser()));
               })
               //dispatch(LOGIN_SUCCESS(auth.currentUser.toJSON()))
             }

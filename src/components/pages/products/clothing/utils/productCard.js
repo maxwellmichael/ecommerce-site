@@ -51,7 +51,7 @@ const ProductCard = (props)=>{
                                 </Grid>
 
                                 <Grid xs={6} item>
-                                    <Button onClick={()=>props.dispatch(ADD_PRODUCT_TO_FIRESTORE_CART({id:props.product.id}))} variant="contained" color="secondary">
+                                    <Button onClick={()=>props.dispatch(ADD_PRODUCT_TO_FIRESTORE_CART(props.product))} variant="contained" color="secondary">
                                         <FaCartPlus style={{width:24,height:20}} />
                                     </Button>
                                 </Grid>

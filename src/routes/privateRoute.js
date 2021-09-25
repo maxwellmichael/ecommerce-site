@@ -3,24 +3,14 @@ import { Route, Redirect } from "react-router-dom";
 import { isLoaded, isEmpty } from "react-redux-firebase";
 import {auth} from '../firebase/authServices';
 
-const PrivateRoute = ({ children, ...remainingProps }) => {
+const PrivateRoute = (route) => {
   const user = auth.currentUser;
   return (
-    <Route
-      {...remainingProps}
-      render={({ location }) =>
-        isLoaded(user) && !isEmpty(user) ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/",
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    />
+
+    <Route>
+      {isLoaded(user) && !isEmpty(user) ? <route.component {...route.props} routes={route.routes} />:
+      <Redirect to={{pathname: "/user/login",}}/>}
+    </Route>
   );
 };
 export default PrivateRoute;

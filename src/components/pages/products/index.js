@@ -13,11 +13,6 @@ import { GET_PRODUCTS_FROM_FIRESTORE, REMOVE_ALL_PRODUCTS_FROM_STORE} from '../.
 
 const ClothingPage = ({dispatch, products})=>{
 
-    // useFirestoreConnect({
-    //     collection: `sets`,
-    // });
-    // const sets = useSelector((state)=>state.firestore.data.sets)
-    // console.log('Sets', sets)
 
     const [category, setCategory] = useState();
 

@@ -39,6 +39,8 @@ const theme = createMuiTheme({
 
 
 function App(){
+
+
   return (
     <Provider store={store}>
       <ReactReduxFirebaseProvider config={rrfConfig} firebase={firebase} dispatch={store.dispatch}

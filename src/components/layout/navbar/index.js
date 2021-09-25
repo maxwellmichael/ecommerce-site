@@ -12,12 +12,14 @@ import {Link} from 'react-router-dom';
 import {LOGOUT} from '../../../redux/actions/user.actions';
 import navbarStyle from './styles';
 import Drawer from './sections/leftDrawer';
+import { useHistory } from 'react-router-dom';
+
 
 const NavBar = (props)=>{
 
   const classes = navbarStyle();
   const mobile = useMediaQuery('min-width:900px');
-
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isAccountMenuOpen = Boolean(anchorEl);
 
@@ -78,8 +80,8 @@ const NavBar = (props)=>{
           {props.user && props.user.profilePhoto?<img alt='Profile' className={classes.navProfilePhoto} src={props.user.profilePhoto} />:<AccountCircle/>}
         </IconButton>
 
-        <IconButton edge='end' className={classes.cartButton} aria-label="cart">
-          <Badge badgeContent={props.user?props.user.cart.length:0} color="error">
+        <IconButton onClick={()=>history.push('/cart')} edge='end' className={classes.cartButton} aria-label="cart">
+          <Badge badgeContent={props.cart?props.cart.length:0} color="error">
             <ShoppingCart/>
           </Badge>
         </IconButton>
@@ -94,6 +96,7 @@ const mapStateToProps = (state)=>{
 
   return({
     user: state.user,
+    cart: state.cart
   })
 }
 export default connect(mapStateToProps)(NavBar); 
